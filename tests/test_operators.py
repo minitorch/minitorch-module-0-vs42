@@ -108,7 +108,10 @@ def test_sigmoid(a: float) -> None:
     * It is  strictly increasing.
     """
     # TODO: Implement for Task 0.2.
-    raise NotImplementedError("Need to implement for Task 0.2")
+    assert 0.0 <= sigmoid(a) <= 1.0
+    assert_close(sigmoid(-a), 1 - sigmoid(a))
+    assert_close(sigmoid(0), 0.5)
+    assert sigmoid(a) <= sigmoid(a + 10)
 
 
 @pytest.mark.task0_2
@@ -116,7 +119,8 @@ def test_sigmoid(a: float) -> None:
 def test_transitive(a: float, b: float, c: float) -> None:
     """Test the transitive property of less-than (a < b and b < c implies a < c)"""
     # TODO: Implement for Task 0.2.
-    raise NotImplementedError("Need to implement for Task 0.2")
+    if a < b and b < c:
+        assert a < c
 
 
 @pytest.mark.task0_2
@@ -125,7 +129,7 @@ def test_symmetric() -> None:
     gives the same value regardless of the order of its input.
     """
     # TODO: Implement for Task 0.2.
-    raise NotImplementedError("Need to implement for Task 0.2")
+    assert mul(12, 18) == mul(18, 12)
 
 
 @pytest.mark.task0_2
@@ -134,14 +138,15 @@ def test_distribute() -> None:
     :math:`z \times (x + y) = z \times x + z \times y`
     """
     # TODO: Implement for Task 0.2.
-    raise NotImplementedError("Need to implement for Task 0.2")
+    x, y, z = 2, 3, 4
+    assert mul(z, add(x, y)) == add(mul(z, x), mul(z, y))
 
 
 @pytest.mark.task0_2
 def test_other() -> None:
     """Write a test that ensures some other property holds for your functions."""
-    # TODO: Implement for Task 0.2.
-    raise NotImplementedError("Need to implement for Task 0.2")
+    x, y, z = 2, 3, 4
+    assert add(x, add(y, z)) == add(add(x, y), z)
 
 
 # ## Task 0.3  - Higher-order functions
@@ -169,7 +174,9 @@ def test_sum_distribute(ls1: List[float], ls2: List[float]) -> None:
     is the same as the sum of each element of `ls1` plus each element of `ls2`.
     """
     # TODO: Implement for Task 0.3.
-    raise NotImplementedError("Need to implement for Task 0.3")
+    x = sum(ls1) + sum(ls2)
+    y = sum([x + y for x, y in zip(ls1, ls2)])
+    assert_close(x, y)
 
 
 @pytest.mark.task0_3
